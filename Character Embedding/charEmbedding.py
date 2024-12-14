@@ -54,8 +54,8 @@ model.compile(loss='binary_crossentropy', optimizer=Adam(learning_rate=0.001), m
 model.fit(x_train_pad, y_train, epochs=10, batch_size=32, validation_data=(x_test_pad, y_test))
 
 # Lưu mô hình đã huấn luyện
-model.save('char_embedding_model.h5')
+model.save('Character Embedding/char_embedding_model.h5')
 
 # Lưu tokenizer
-with open('ce_tokenizer.pkl', 'wb') as f:
+with open('Character Embedding/ce_tokenizer.pkl', 'wb') as f:
     pickle.dump(tokenizer, f)

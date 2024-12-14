@@ -65,8 +65,8 @@ model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy']
 model.fit(x_train_pad, y_train, epochs=10, batch_size=32, validation_data=(x_test_pad, y_test))
 
 # Lưu mô hình đã huấn luyện
-model.save('word2vec_model.h5')
+model.save('Word Embedding/word2vec_model.h5')
 
 # Lưu tokenizer
-with open('w2p_tokenizer.pkl', 'wb') as f:
+with open('Word Embedding/w2p_tokenizer.pkl', 'wb') as f:
     pickle.dump(tokenizer, f)

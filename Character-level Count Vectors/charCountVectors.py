@@ -52,5 +52,5 @@ model.compile(loss='binary_crossentropy', optimizer=Adam(learning_rate=0.001), m
 model.fit(x_train_count, y_train, epochs=10, batch_size=32, validation_data=(x_test_count, y_test))
 
 # Lưu mô hình đã huấn luyện và vectorizer
-model.save('char_count_model.h5')
-joblib.dump(count_vectorizer, 'char_count_vectorizer.pkl')
+model.save('Character-level Count Vectors/char_count_model.h5')
+joblib.dump(count_vectorizer, 'Character-level Count Vectors/char_count_vectorizer.pkl')

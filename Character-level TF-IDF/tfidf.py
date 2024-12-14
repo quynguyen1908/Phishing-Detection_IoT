@@ -48,5 +48,5 @@ model.compile(loss='binary_crossentropy', optimizer=Adam(learning_rate=0.001), m
 model.fit(x_train_tfidf, y_train, epochs=10, batch_size=32, validation_data=(x_test_tfidf, y_test))
 
 # Lưu mô hình đã huấn luyện và vectorizer
-model.save('tfidf_model.h5')
-joblib.dump(tfidf_vectorizer, 'tfidf_vectorizer.pkl')
+model.save('Character-level TF-IDF/tfidf_model.h5')
+joblib.dump(tfidf_vectorizer, 'Character-level TF-IDF/tfidf_vectorizer.pkl')
