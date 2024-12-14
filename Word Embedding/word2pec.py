@@ -62,7 +62,7 @@ model.add(Dense(1, activation='sigmoid'))
 model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
 
 # Huấn luyện mô hình
-model.fit(x_train_pad, y_train, epochs=5, batch_size=32, validation_data=(x_test_pad, y_test))
+model.fit(x_train_pad, y_train, epochs=10, batch_size=32, validation_data=(x_test_pad, y_test))
 
 # Lưu mô hình đã huấn luyện
 model.save('word2vec_model.h5')
