@@ -37,7 +37,7 @@ x_test_count = count_vectorizer.transform(x_test)
 x_train_count = x_train_count.toarray()
 x_test_count = x_test_count.toarray()
 
-# Xây dựng mô hình học sâu
+# Xây dựng mô hình học sâu Dense Network
 model = Sequential()
 model.add(Dense(512, input_shape=(x_train_count.shape[1],), activation='relu'))
 model.add(Dropout(0.5))

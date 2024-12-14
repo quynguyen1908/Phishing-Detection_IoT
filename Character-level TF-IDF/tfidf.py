@@ -33,7 +33,7 @@ tfidf_vectorizer = TfidfVectorizer(analyzer='char', ngram_range=(1, 3))
 x_train_tfidf = tfidf_vectorizer.fit_transform(x_train)
 x_test_tfidf = tfidf_vectorizer.transform(x_test)
 
-# Xây dựng mô hình học sâu
+# Xây dựng mô hình học sâu Dense Network
 model = Sequential()
 model.add(Dense(512, input_shape=(x_train_tfidf.shape[1],), activation='relu'))
 model.add(Dropout(0.5))

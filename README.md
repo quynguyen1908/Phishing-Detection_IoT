@@ -14,13 +14,21 @@
     + Chuyển văn bản thành các chuỗi số.
     + Chuẩn hóa độ dài của các chuỗi.
     + Tạo embedding cho các từ trong tập huấn luyện.
-- Thiết kế mô hình học sâu:
-    + Mô hình sử dụng LSTM (Long Short-Term Memory) thuộc mạng nơ-ron hồi quy (Recurrent Neural Network - RNN) để học các phụ thuộc dài hạn trong dữ liệu tuần tự.
-    + Cấu trúc mô hình:
-        * Dữ liệu đầu vào: Được token hóa và padding để đảm bảo cùng độ dài.
+- Thiết kế mô hình học sâu: 
+    + Đồ án thiết kế 2 mô hình học sâu (Deep Learning): LSTM dùng cho vector đặc trưng tuần tự (Embedding) và Dense Network dùng cho vector đặc trưng không tuần tự (TF-IDF, Count Vectorizer).
+    + LSTM (Long Short-Term Memory) là một loại mạng nơ-ron hồi quy (Recurrent Neural Network - RNN) được thiết kế để xử lý và dự đoán dữ liệu tuần tự.
+    + Dense Network, còn được gọi là Fully Connected Network (FCN), là một loại mạng nơ-ron nhân tạo trong đó mỗi nơ-ron trong một lớp được kết nối với tất cả các nơ-ron trong lớp tiếp theo. Dense Network phù hợp cho các bài toán mà dữ liệu đầu vào không có tính tuần tự.
+    + Cấu trúc mô hình của LSTM:
+        * Dữ liệu đầu vào: Dữ liệu đầu vào là các đặc trưng được mã hóa dưới dạng vector số.
         * Embedding Layer: Biểu diễn từ dưới dạng vector ngữ nghĩa với kích thước cố định. Ma trận embedding được học trong quá trình huấn luyện.
         * LSTM Layers: Sử dụng 2 lớp LSTM có 128 tế bào. Lớp 1 học đặc trưng tuần tự, trả về chuỗi trạng thái, lớp 2 tổng hợp thông tin, trả về trạng thái cuối cùng.
-        * Dropout Layers: Dùng để tắt 50% nơ-ron trong quá trình huấn luyện, giúp giảm thiểu overfitting.
+        * Dropout Layers: Dùng để tắt ngẫu nhiên 50% nơ-ron trong quá trình huấn luyện, giúp giảm thiểu overfitting.
+        * Dense Layer: Nhận các đặc trưng từ lớp LSTM và chuyển chúng thành xác suất thông qua hàm sigmoid, quyết định xem tin nhắn là spam hay không spam.
+    + Cấu trúc mô hình của Dense Network:
+        * Dữ liệu đầu vào: Dữ liệu đầu vào là các đặc trưng được mã hóa dưới dạng vector số.
+        * Dense Layer 1: Lớp Dense đầu tiên có 512 neuron và sử dụng hàm kích hoạt ReLU để học các đặc trưng phi tuyến tính từ dữ liệu đầu vào.
+        * Dense Layer 2: Lớp Dense thứ hai có 256 neuron và tiếp tục trích xuất các đặc trưng sâu hơn.
+        * Dropout Layers: Dùng để tắt ngẫu nhiên 50% nơ-ron trong quá trình huấn luyện, giúp giảm thiểu overfitting.
         * Dense Layer: Nhận các đặc trưng từ lớp LSTM và chuyển chúng thành xác suất thông qua hàm sigmoid, quyết định xem tin nhắn là spam hay không spam.
     + Biên dịch mô hình:
         * Loss: Dùng hàm mất mát binary_crossentropy (cho phân loại nhị phân) để đo lường sự khác biệt giữa nhãn thực tế và dự đoán của mô hình.
