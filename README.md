@@ -69,7 +69,7 @@
 (Ham)   Hey, I found this great article on machine learning. Thought you might like it.
 - Kết quả dự đoán:
     + Word Embedding (Word2Pec): 
-    Accuracy: 90.71566462516785
+    Accuracy: 90.13539552688599
     
     Text: Free entry in 2 a wkly comp to win FA Cup final tkts 21st May 2005.
     Prediction: Spam
