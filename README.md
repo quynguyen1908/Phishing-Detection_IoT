@@ -4,16 +4,16 @@
 
 - Sử dụng phương pháp Embedding để biểu diễn các đối tượng (từ ngữ, ký tự) dưới dạng các vector số học trong không gian nhiều chiều. Các vector này được thiết kế sao cho các đối tượng có ngữ nghĩa tương tự sẽ có các vector gần nhau trong không gian vector.
 - Cấp độ từ ngữ: Word Embedding (Word2Pec)
-- Cấp độ ký tự: Character Embedding (TF-IDF, Count Vector)
+- Cấp độ ký tự: Character Embedding
 
 ##  Tiền xử lý dữ liệu, thiết kế mô hình học sâu (DL).
 
 - Tiền xử lý dữ liệu (spam.csv):
     + Loại bỏ cột không cần thiết và dữ liệu trùng lặp.
     + Mã hóa nhãn (Label Encoding) để chuyển nhãn văn bản thành số.
-    + Chuyển văn bản thành các chuỗi số.
-    + Chuẩn hóa độ dài của các chuỗi.
-    + Tạo embedding cho các từ trong tập huấn luyện.
+    + Chuyển đổi văn bản thành các token (từ hoặc ký tự).
+    + Đảm bảo tất cả các chuỗi có cùng độ dài.
+    + Chuyển đổi các token thành các vector số.
 - Thiết kế mô hình học sâu: 
     + Đồ án thiết kế 2 mô hình học sâu (Deep Learning): LSTM dùng cho vector đặc trưng tuần tự (Embedding) và Dense Network dùng cho vector đặc trưng không tuần tự (TF-IDF, Count Vectorizer).
     + LSTM (Long Short-Term Memory) là một loại mạng nơ-ron hồi quy (Recurrent Neural Network - RNN) được thiết kế để xử lý và dự đoán dữ liệu tuần tự.
@@ -29,7 +29,7 @@
         * Dense Layer 1: Lớp Dense đầu tiên có 512 neuron và sử dụng hàm kích hoạt ReLU để học các đặc trưng phi tuyến tính từ dữ liệu đầu vào.
         * Dense Layer 2: Lớp Dense thứ hai có 256 neuron và tiếp tục trích xuất các đặc trưng sâu hơn.
         * Dropout Layers: Dùng để tắt ngẫu nhiên 50% nơ-ron trong quá trình huấn luyện, giúp giảm thiểu overfitting.
-        * Dense Layer: Nhận các đặc trưng từ lớp LSTM và chuyển chúng thành xác suất thông qua hàm sigmoid, quyết định xem tin nhắn là spam hay không spam.
+        * Dense Layer cuối: Lớp đầu ra có 1 neuron và sử dụng hàm sigmoid để dự đoán xác suất (phân loại nhị phân).
     + Biên dịch mô hình:
         * Loss: Dùng hàm mất mát binary_crossentropy (cho phân loại nhị phân) để đo lường sự khác biệt giữa nhãn thực tế và dự đoán của mô hình.
         * Optimizer: Dùng thuật toán adam để điều chỉnh trọng số trong quá trình huấn luyện, tối ưu hóa hiệu quả mô hình.
