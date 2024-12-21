@@ -9,8 +9,10 @@
 ##  Tiền xử lý dữ liệu, thiết kế mô hình học sâu (DL).
 
 - Tiền xử lý dữ liệu (spam.csv):
-    + Loại bỏ cột không cần thiết và dữ liệu trùng lặp.
+    + Loại bỏ cột không cần thiết và dữ liệu trùng lặp, xử lý các giá trị thiếu.
     + Mã hóa nhãn (Label Encoding) để chuyển nhãn văn bản thành số.
+    + Loại bỏ các ký tự đặc biệt và chuyển đổi văn bản thành chữ thường.
+    + Chuẩn hóa các từ về dạng gốc của chúng, loại bỏ các từ dừng (stop words) không mang nhiều ý nghĩa.
     + Chuyển đổi văn bản thành các token (từ hoặc ký tự).
     + Đảm bảo tất cả các chuỗi có cùng độ dài.
     + Chuyển đổi các token thành các vector số.
@@ -77,10 +79,10 @@
 (Ham)   Hey, I found this great article on machine learning. Thought you might like it.
 - Kết quả dự đoán:
     + Word Embedding (Word2Pec): 
-    Accuracy: 90.13539552688599
+    Accuracy: 88.97485733032227
     
     Text: Free entry in 2 a wkly comp to win FA Cup final tkts 21st May 2005.
-    Prediction: Spam
+    Prediction: Ham
 
     Text: Nah I don't think he goes to usf, he lives around here though.
     Prediction: Ham
@@ -91,28 +93,28 @@
     Text: Hey, are we still meeting for lunch tomorrow?
     Prediction: Ham
 
-    Text: URGENT! Your account has been compromised. Please reset your password immediately.
+    Text: URGENT! Your account has been compromised. Please reset your password immediately.  
     Prediction: Ham
 
-    Text: Can you send me the report by end of day?   
+    Text: Can you send me the report by end of day?
     Prediction: Ham
 
     Text: Win a brand new car! Text WIN to 12345 to enter the contest.
     Prediction: Ham
 
-    Text: Don't forget about the meeting at 3 PM.     
+    Text: Don't forget about the meeting at 3 PM.
     Prediction: Ham
 
-    Text: Your subscription is about to expire. Renew now to continue enjoying our services.
+    Text: Your subscription is about to expire. Renew now to continue enjoying our services.  
     Prediction: Ham
 
-    Text: Hey, just checking in. How have you been?   
+    Text: Hey, just checking in. How have you been?
     Prediction: Ham
 
     Text: Limited time offer! Get 50% off on all products. Shop now at our website.
     Prediction: Ham
 
-    Text: Are you coming to the party this weekend?   
+    Text: Are you coming to the party this weekend?
     Prediction: Ham
 
     Text: Your package has been shipped and will arrive in 3-5 business days.
@@ -130,17 +132,17 @@
     Text: Don't miss out on our summer sale! Up to 70% off on selected items.
     Prediction: Ham
 
-    Text: Can we reschedule our meeting to next week? 
+    Text: Can we reschedule our meeting to next week?
     Prediction: Ham
 
     Text: Your order has been confirmed. Thank you for shopping with us.
     Prediction: Ham
 
-    Text: Hey, I found this great article on machine learning. Thought you might like it.
+    Text: Hey, I found this great article on machine learning. Thought you might like it.     
     Prediction: Ham
 
     + Character Embedding: 
-    Accuracy: 97.77562618255615
+    Accuracy: 96.90521955490112
 
     Text: Free entry in 2 a wkly comp to win FA Cup final tkts 21st May 2005.
     Prediction: Spam
@@ -203,7 +205,7 @@
     Prediction: Ham
 
     + Character-level TF-IDF:
-    Accuracy: 98.8394584139265
+    Accuracy: 98.45261121856866
 
     Text: Free entry in 2 a wkly comp to win FA Cup final tkts 21st May 2005.
     Prediction: Spam
@@ -266,7 +268,7 @@
     Prediction: Ham
 
     + Character-level Count Vectors:
-    Accuracy: 98.45261121856866
+    Accuracy: 98.16247582205028
 
     Text: Free entry in 2 a wkly comp to win FA Cup final tkts 21st May 2005.
     Prediction: Spam

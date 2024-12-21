@@ -7,6 +7,14 @@ from keras._tf_keras.keras.preprocessing.sequence import pad_sequences
 from sklearn.metrics import accuracy_score
 import pickle
 import joblib
+import re
+import nltk
+
+# nltk.download('stopwords')
+# nltk.download('wordnet')
+
+from nltk.corpus import stopwords
+from nltk.stem import WordNetLemmatizer
 
 # Dữ liệu mẫu
 sample_texts = [
@@ -36,10 +44,30 @@ df = pd.read_csv("spam.csv", encoding='ISO-8859-1')
 df.drop(columns=['Unnamed: 2', 'Unnamed: 3', 'Unnamed: 4'], inplace=True)
 df = df.rename(columns={'v1': 'TARGET', 'v2': 'MESSAGE'})
 df.drop_duplicates(keep='first', inplace=True)
+df.dropna(inplace=True)
 
 # Label encoding
 encoder = LabelEncoder()
 df['TARGET'] = encoder.fit_transform(df['TARGET'])
+
+# Loại bỏ các ký tự đặc biệt và chuyển đổi văn bản thành chữ thường
+def clean_text(text):
+    text = text.lower()
+    text = re.sub(r'\W', ' ', text)
+    text = re.sub(r'\s+', ' ', text)
+    text = text.strip()
+    return text
+
+df['MESSAGE'] = df['MESSAGE'].apply(clean_text)
+
+# Lemmatization
+lemmatizer = WordNetLemmatizer()
+def lemmatize_text(text):
+    words = text.split()
+    words = [lemmatizer.lemmatize(word) for word in words if word not in stopwords.words('english')]
+    return ' '.join(words)
+
+df['MESSAGE'] = df['MESSAGE'].apply(lemmatize_text)
 
 # Chia dữ liệu
 x = df['MESSAGE']
@@ -157,7 +185,7 @@ def char_embedding():
         print(f'Text: {text}\nPrediction: {"Spam" if prediction > 0.5 else "Ham"}\n')
 
 if __name__ == "__main__":
-    word2vec()
+    # word2vec()
     # tfidf()
-    # count_vectors()
+    count_vectors()
     # char_embedding()

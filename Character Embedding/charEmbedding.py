@@ -7,6 +7,14 @@ from keras._tf_keras.keras.preprocessing.sequence import pad_sequences
 from keras._tf_keras.keras.preprocessing.text import Tokenizer
 from keras._tf_keras.keras.optimizers import Adam
 import pickle
+import re
+import nltk
+
+# nltk.download('stopwords')
+# nltk.download('wordnet')
+
+from nltk.corpus import stopwords
+from nltk.stem import WordNetLemmatizer
 
 # Đọc dữ liệu từ file CSV
 df = pd.read_csv("spam.csv", encoding='ISO-8859-1')
@@ -20,9 +28,31 @@ df = df.rename(columns={'v1': 'TARGET', 'v2': 'MESSAGE'})
 # Xóa các dòng trùng lặp
 df.drop_duplicates(keep='first', inplace=True)
 
+# Xử lý các giá trị thiếu
+df.dropna(inplace=True)
+
 # Mã hóa nhãn (label encoding)
 encoder = LabelEncoder()
 df['TARGET'] = encoder.fit_transform(df['TARGET'])
+
+# Loại bỏ các ký tự đặc biệt và chuyển đổi văn bản thành chữ thường
+def clean_text(text):
+    text = text.lower()
+    text = re.sub(r'\W', ' ', text)
+    text = re.sub(r'\s+', ' ', text)
+    text = text.strip()
+    return text
+
+df['MESSAGE'] = df['MESSAGE'].apply(clean_text)
+
+# Lemmatization
+lemmatizer = WordNetLemmatizer()
+def lemmatize_text(text):
+    words = text.split()
+    words = [lemmatizer.lemmatize(word) for word in words if word not in stopwords.words('english')]
+    return ' '.join(words)
+
+df['MESSAGE'] = df['MESSAGE'].apply(lemmatize_text)
 
 # Chia dữ liệu thành tập huấn luyện và tập kiểm tra
 x = df['MESSAGE']
